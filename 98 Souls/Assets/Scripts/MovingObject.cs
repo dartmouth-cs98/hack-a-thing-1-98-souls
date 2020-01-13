@@ -44,6 +44,9 @@ public abstract class MovingObject : MonoBehaviour
       Vector3 newPosition = Vector3.MoveTowards(rb2D.position, end, inverseMoveTime * Time.deltaTime);
       rb2D.MovePosition(newPosition);
       sqrRemainingDistance = (transform.position - end).sqrMagnitude;
+      Debug.Log(sqrRemainingDistance);
+      Debug.Log(end);
+      Debug.Log(transform.position);
       yield return null;
     }
   }
@@ -53,9 +56,9 @@ public abstract class MovingObject : MonoBehaviour
   {
     RaycastHit2D hit;
     bool canMove = Move(xDir, yDir, out hit);
+
     if(hit.transform == null)
       return;
-    
     T hitComponent = hit.transform.GetComponent<T>();
 
     if(!canMove && hitComponent != null)
